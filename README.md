@@ -1,0 +1,8 @@
+This script `get_inputbert` reads two input files, `aa_example.txt`, amino acid sequences and `nn_example.txt` (the correspoding CDS sequence), and performs some operations on the data.
+In the first part of the code, `aa_example.txt` is read line by line, and the amino acids at position 31 are extracted and stored in a list called `list_aa`. This was done because I was working with sequences lenght 61 amino acids, and I just wanted to extract the amino acid located at the middle of the sequence.
+Next, `nn_example.txt` is read line by line. The nucleotide sequences are split into codons, and the codons at position 31 are extracted and stored in a list called `codon_list`. The codons are also checked for validity, and any invalid codons are stored in the `check` list.
+After that, a DataFrame called `data_f` is created with information about the positions, codons, and corresponding amino acids.
+The code then flattens the `list_aa` and `codon_list` using `itertools.chain`, and stores the flattened lists in `new_aalist` and `new_codonlist`, respectively.
+Next, the code searches for each codon in `new_codonlist` in the `data_f` DataFrame to find its corresponding position. If the codon is found, the position is retrieved and stored in a formatted string along with the codon. These formatted strings are then stored in a list called `codon_list`.
+Similarly, the code searches for each amino acid in `new_aalist` in the `data_f` DataFrame to find its corresponding position. If the amino acid is found, the position is retrieved, and a binary vector is created with '1' at the corresponding position and '0' elsewhere. These vectors are stored in a list called `l_aa`.
+Finally, the `codon_list` and `l_aa` are written to a file called `codon_pos_onehot.txt`.
